@@ -1,0 +1,33 @@
+[socialware]
+id = "agent-forge"
+name = "AgentForge"
+namespace = "af"
+version = "0.9.3"
+
+[declaration]
+content_types = ["af:template.register", "af:instance.spawn", "af:instance.destroy",
+                 "af:instance.wake", "af:instance.sleep", "af:instance.configure",
+                 "af:instance.join", "af:instance.leave",
+                 "af:role.grant", "af:role.revoke"]
+hooks = ["check_role", "on_command", "on_mention", "auto_wake", "idle_check", "resource_guard"]
+roles = ["af:admin", "af:operator", "af:agent"]
+flows = ["agent_lifecycle"]
+
+[commands]
+spawn = { params = ["template", "name", "rooms?"], role = "af:operator" }
+destroy = { params = ["name"], role = "af:operator" }
+list = { params = ["status?"], role = "af:operator" }
+wake = { params = ["name"], role = "af:operator" }
+sleep = { params = ["name"], role = "af:operator" }
+config = { params = ["name", "key", "value"], role = "af:admin" }
+templates = { params = [], role = "af:operator" }
+register-template = { params = ["id", "adapter", "config"], role = "af:admin" }
+
+[dependencies]
+extensions = ["EXT-04", "EXT-06", "EXT-13", "EXT-15", "EXT-17"]
+socialware = ["event-weaver"]
+
+[policy]
+max_agents = 50
+max_concurrent_per_agent = 3
+default_idle_timeout = "1h"

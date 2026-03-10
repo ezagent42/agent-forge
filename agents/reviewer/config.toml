@@ -1,0 +1,21 @@
+[agent]
+name = "reviewer"
+template_id = "code-reviewer"
+status = "active"
+
+[agent.config]
+model = "sonnet"
+allowed_tools = ["Read", "Search", "Bash(read-only)"]
+max_tokens = 4096
+
+[agent.limits]
+max_concurrent = 3
+api_budget_daily = 500
+
+[agent.lifecycle]
+auto_start = true
+idle_timeout = "1h"
+auto_wake_on_mention = true
+
+[agent.rooms]
+list = ["agentforge-hq"]

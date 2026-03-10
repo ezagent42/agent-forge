@@ -1,0 +1,21 @@
+[agent]
+name = "translator"
+template_id = "comment-translator"
+status = "active"
+
+[agent.config]
+model = "sonnet"
+allowed_tools = ["Read", "Write", "Edit", "Search", "Grep", "Glob", "Bash"]
+max_tokens = 8192
+
+[agent.limits]
+max_concurrent = 3
+api_budget_daily = 500
+
+[agent.lifecycle]
+auto_start = true
+idle_timeout = "1h"
+auto_wake_on_mention = true
+
+[agent.rooms]
+list = ["agentforge-hq"]
